@@ -1,7 +1,11 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QCanBus>
 #include <iostream>
+#include  <QQmlContext>
+
+#include "can/functions.h"
+#include "can/interface.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +13,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);
+
+    qmlRegisterType<Interface>("Interface", 1, 0, "Interface");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
@@ -19,20 +25,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-
-    QString errorString;
-    QCanBusDevice *device = QCanBus::instance()->createDevice(
-        QStringLiteral("socketcan"), QStringLiteral("vcan0"), &errorString);
-
-    device->connectDevice();
-
-    QCanBusFrame frame;
-    frame.setFrameId(8);
-    QByteArray payload("AAAA");
-    frame.setPayload(payload);
-    device->writeFrame(frame);
-
-    frame = device->readFrame();
+    CanClass can;
 
     return app.exec();
 }
