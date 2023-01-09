@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
-import Interface 1.0
+import Protocol 1.0
 
 Window {
     width: 500
@@ -10,8 +10,8 @@ Window {
     title: qsTr("Hello World")
     color: "green"
 
-    Interface {
-        id: cpp_interface
+    Protocol {
+        id: protocol
     }
 
     Item {
@@ -73,7 +73,6 @@ Window {
                 maximumLength: 16
                 anchors.centerIn: parent
                 focus: true
-                onTextChanged: cpp_interface.Message = text
             }
         }
     }
@@ -163,7 +162,7 @@ Window {
             Button {
                 text: "Send"
                 highlighted: true
-                onClicked: cpp_interface.printNum(frame_id.text)
+                onClicked: protocol.setData(message.text, frame_id.text)
             }
         }
     }

@@ -4,8 +4,7 @@
 #include <iostream>
 #include  <QQmlContext>
 
-#include "can/functions.h"
-#include "can/interface.h"
+#include "can/protocol.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +13,7 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<Interface>("Interface", 1, 0, "Interface");
+    qmlRegisterType<Protocol>("Protocol", 1, 0, "Protocol");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
@@ -25,7 +24,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    CanClass can;
+    Protocol a;
 
     return app.exec();
 }
