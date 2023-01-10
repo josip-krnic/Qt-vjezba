@@ -26,7 +26,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     can/protocol.h \
-    widgets/f.h
-
-DISTFILES += \
-    widgets/Untitled Document
