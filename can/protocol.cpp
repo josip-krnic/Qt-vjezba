@@ -16,7 +16,7 @@ Protocol::Protocol(QObject *parent)
 
 int Protocol::sendMessage()
 {
-    frame.setFrameId(8);
+    //frame.setFrameId(8);
     QByteArray payload(_message);
     frame.setPayload(payload);
     device->writeFrame(frame);
@@ -29,7 +29,7 @@ void Protocol::setData(QByteArray message, int id)
 {
     qDebug() << message;
     qDebug() << id;
-    frame.setFrameId(id);
+    _id = id;
     _message = message;
     sendMessage();
 }
