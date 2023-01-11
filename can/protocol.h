@@ -15,10 +15,11 @@ private:
     QString errorString;
     QCanBusDevice *device;
     QByteArray payload;
-
-public:
     QByteArray _message;
     QCanBusFrame frame;
+    int _id;
+
+public:
     int sendMessage();
     explicit Protocol(QObject *parent = nullptr);
 
