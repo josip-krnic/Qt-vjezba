@@ -14,22 +14,34 @@ Protocol::Protocol(QObject *parent)
         device->connectDevice();
 }
 
+Protocol::~Protocol()
+{
+    device->disconnectDevice();
+    qDebug() << "Device disconnected";
+}
+
 int Protocol::sendMessage()
 {
-    //frame.setFrameId(8);
     QByteArray payload(_message);
     frame.setPayload(payload);
-    device->writeFrame(frame);
+    if(!device->writeFrame(frame))
+        qDebug() << "Error";
 
-    frame = device->readFrame();
     return 0;
 }
 
-void Protocol::setData(QByteArray message, int id)
+void Protocol::setData(QByteArray message, quint32 id)
 {
     qDebug() << message;
     qDebug() << id;
     _id = id;
     _message = message;
     sendMessage();
+}
+
+int Protocol::getMessage()
+{
+    frame = device->readFrame();
+
+    return 0;
 }

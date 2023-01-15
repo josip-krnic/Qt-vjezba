@@ -5,6 +5,7 @@
 #include  <QQmlContext>
 
 #include "can/protocol.h"
+#include "can/reciever.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +25,9 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    Protocol a;
+    reciever recieveFramesObj;
+    QQmlContext *context = engine.rootContext();
+    context->setContextProperty("recieveFramesObj", &recieveFramesObj);
 
     return app.exec();
 }

@@ -53,9 +53,8 @@ Window {
                         id: message
                         color: "black";
                         selectionColor: "green"
-                        font.pixelSize: 16; font.bold: true
+                        font.pixelSize: 0.5 * parent.height
                         width: parent.width-16
-                        maximumLength: 16
                         anchors.centerIn: parent
                         focus: true
                     }
@@ -91,7 +90,7 @@ Window {
                         id: frame_id
                         color: "black";
                         selectionColor: "green"
-                        font.pixelSize: 16; font.bold: true
+                        font.pixelSize: 0.5 * parent.height;
                         width: parent.width-16
                         maximumLength: 16
                         anchors.centerIn: parent

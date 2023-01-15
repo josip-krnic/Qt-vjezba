@@ -17,16 +17,18 @@ private:
     QByteArray payload;
     QByteArray _message;
     QCanBusFrame frame;
-    int _id;
+    quint32 _id;
 
 public:
     int sendMessage();
+    int getMessage();
     explicit Protocol(QObject *parent = nullptr);
+    ~Protocol();
 
 signals:
 
 public slots:
-    void setData(QByteArray msg, int id);
+    void setData(QByteArray msg, quint32 id);
 };
 
 #endif // PROTOCOL_H
